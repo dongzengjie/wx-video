@@ -13,7 +13,7 @@ Page({
       var serverUrl = app.serverUrl;
       var me =this;
 //     var user =  app.userInfo;
-      var user = app.getGlobalUserInfo('userInfo');
+      var user = app.getGlobalUserInfo();
      if (user.faceImage != null && user.faceImage != undefined && user.faceImage !=''){
         me.setData({
           faceUrl: serverUrl + user.faceImage,
@@ -32,7 +32,7 @@ Page({
     },
     logout:function(){
       var serverUrl = app.serverUrl;
-      var id = app.getGlobalUserInfo('userInfo').id
+      var id = app.getGlobalUserInfo().id
       wx.showLoading({
         title: '请等待...',
       });
@@ -70,7 +70,7 @@ Page({
     changeFace:function(){
       var me = this;
       var serverUrl = app.serverUrl;
-      var userId = app.getGlobalUserInfo("userInfo").id;
+      var userId = app.getGlobalUserInfo().id;
       wx.chooseImage({
         count: 1, // 默认9
         sizeType: [ 'compressed'], // 可以指定是原图还是压缩图，默认二者都有

@@ -5,7 +5,10 @@ Page({
   },
 
   onLoad: function (params) {
-  },
+    var me  = this;
+    var redirectUrl = params.redirectUrl;
+    
+  }, 
 
   // 登录  
   doLogin: function (e) {
@@ -48,10 +51,10 @@ Page({
             });
             console.log("登陆信息：" + res.data.result);
             //app.userInfo = res.data.result;
-            app.setGlobalUserInfo('userInfo', res.data.result);
+            app.setGlobalUserInfo(res.data.result);
             // 页面跳转
             wx.navigateTo({
-              url: '../mine/mine',
+              url: '../index/index',
             })
           } else if (res.data.status == 500) {
             // 失败弹出框

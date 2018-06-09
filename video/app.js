@@ -3,10 +3,10 @@ App({
   serverUrl: "http://83f73724.ngrok.io",
   userInfo: null,
 
-  setGlobalUserInfo:function(key,value){
-    wx.setStorageSync(key, value);
+  setGlobalUserInfo:function(value){
+    wx.setStorageSync('userInfo', value);
   },
-  getGlobalUserInfo(key){
-    return wx.getStorageSync(key);
+  getGlobalUserInfo(){
+    return wx.getStorageSync('userInfo');
   }
 })

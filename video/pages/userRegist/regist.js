@@ -47,7 +47,7 @@ Page({
               duration: 3000
             }),
               //app.userInfo = res.data.result;
-              app.setGlobalUserInfo(userInfo, res.data.result);
+              app.setGlobalUserInfo(res.data.result);
             // TODO 页面跳转
           } else if (status == 500) {
             wx.showToast({
