@@ -9,6 +9,7 @@ Page({
 
   // 登录  
   doLogin: function (e) {
+   
     var formObject = e.detail.value;
     var username = formObject.username;
     var password = formObject.password;
@@ -46,7 +47,8 @@ Page({
               duration: 2000
             });
             console.log("登陆信息：" + res.data.result);
-            app.userInfo = res.data.result;
+            //app.userInfo = res.data.result;
+            app.setGlobalUserInfo('userInfo', res.data.result);
             // 页面跳转
             wx.navigateTo({
               url: '../mine/mine',

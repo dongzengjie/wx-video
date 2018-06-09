@@ -45,7 +45,8 @@ Page({
     var fileUrl = me.data.videoParm.tempFilePath;
     var desc = desc;
     var bgmId = bgmId;
-    var userId = app.userInfo.id;
+    var userId = app.getGlobalUserInfo('userInfo').id
+    console.log("bgm:" + app.getGlobalUserInfo('userInfo'));
     // 上传短视频
     wx.showLoading({
       title: '上传中...'

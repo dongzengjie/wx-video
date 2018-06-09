@@ -1,6 +1,6 @@
 <view style='width:100%;height:100%;'>
 
-  <video src='http://a9857022.ngrok.io/upload/18053088Y40XB7R4/video/2bcc4355-24eb-4ecb-be20-542858dbe356.mp4' style='width:100%;height:100%;' controls='{{false}}' autoplay='{{true}}' loop='{{true}}' objectFit='{{cover}}'>
+  <video  src='{{serverUrl}}{{videoInfo.videoPath}}' style='width:100%;height:100%;' controls='{{false}}' autoplay='{{true}}' loop='{{true}}' objectFit='{{cover}}' id='myVideo'>
 
     <cover-view>
       <!-- 上传视频 -->
@@ -11,7 +11,7 @@
 
     <cover-view class='container-me'>
       <!-- 头像 -->
-      <cover-image class="face" src='http://a9857022.ngrok.io/upload/18053088Y40XB7R4/face/201806071446121980100003931349a-244b-4591-aeb8-461f0aa4e32d.jpg' bindtap='showPublisher'></cover-image>
+      <cover-image class="face" src='{{serverUrl}}{{videoInfo.faceImage}}' bindtap='showPublisher'></cover-image>
 
       <!-- 喜欢收藏按钮 -->
       <block wx:if="{{userLikeVideo}}">
@@ -31,7 +31,7 @@
 
 
      <cover-view class='container-words'>
-      <cover-view>@{{publisher.nickname}}</cover-view>
+      <cover-view>@{{videoInfo.nickname}}</cover-view>
       <cover-view class='video-desc'>{{videoInfo.videoDesc}}</cover-view>
     </cover-view> 
 

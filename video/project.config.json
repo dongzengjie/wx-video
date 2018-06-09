@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.0.8",
 	"appid": "wx90f62f7f54652190",
-	"projectname": "video",
+	"projectname": "video-dev",
 	"isGameTourist": false,
 	"condition": {
 		"search": {

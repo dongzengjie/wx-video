@@ -5,7 +5,7 @@
       <radio-group name="bgmId">
         <block wx:for="{{bgmList}}">
           <view class='videolist'>
-            <audio name="{{item.name}}" author="{{item.author}}" src="{{serverUrl}}{{item.path}}" style='width:300px' id="myAudio" controls loop></audio>          
+            <audio name="{{item.name}}" author="{{item.author}}" src="{{serverUrl}}{{item.path}}" class="myaudio" id="myAudio" controls loop></audio>          
             <radio  class='bgmcss' name="bgmId"  value='{{item.id}}'></radio>
           </view>
         </block>

@@ -12,8 +12,8 @@ Page({
     onLoad(){
       var serverUrl = app.serverUrl;
       var me =this;
-     var user =  app.userInfo;
-    
+//     var user =  app.userInfo;
+      var user = app.getGlobalUserInfo('userInfo');
      if (user.faceImage != null && user.faceImage != undefined && user.faceImage !=''){
         me.setData({
           faceUrl: serverUrl + user.faceImage,
@@ -32,7 +32,7 @@ Page({
     },
     logout:function(){
       var serverUrl = app.serverUrl;
-      var id = app.userInfo.id
+      var id = app.getGlobalUserInfo('userInfo').id
       wx.showLoading({
         title: '请等待...',
       });
@@ -44,13 +44,14 @@ Page({
         },
         success:function(res){
             if(res.data.status == 200){
-              app.userInfo = null;
+             // app.userInfo = null;
               wx.hideLoading();
               wx.showToast({
                 title: '注销成功',
                 icon: 'success',
                 duration: 1500
               })
+              wx.removeStorageSync("userInfo")
               wx.redirectTo({
                 url: '../userLogin/login',
               });
@@ -69,7 +70,7 @@ Page({
     changeFace:function(){
       var me = this;
       var serverUrl = app.serverUrl;
-      var userId = app.userInfo.id;
+      var userId = app.getGlobalUserInfo("userInfo").id;
       wx.chooseImage({
         count: 1, // 默认9
         sizeType: [ 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -109,8 +110,8 @@ Page({
     uploadVideo:function(){
 
       var me = this;
-      var serverUrl = app.serverUrl;
-      var userId = app.userInfo.id;
+      // var serverUrl = app.serverUrl;
+      // var userId = app.getGlobalUserInfo('userInfo').id;
 
       wx.chooseVideo({
         sourceType: ['album', 'camera'],

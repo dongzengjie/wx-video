@@ -4,13 +4,16 @@ page {
 
 .container {
     display: flex;
-    margin-top: 10px; 
-     justify-content: space-around;   
+    margin-top: 10rpx; 
+    justify-content: space-around;   
 }
 .videolist{
   margin-top: 10rpx;
   margin-left: 30rpx;
   
+}
+.myaudio{
+  width: 300rpx;
 }
 .bgmcss{
  margin-top: 30rpx;

@@ -1,13 +1,13 @@
 // 1 导入js文件
 var WxSearch = require('../../wxSearchView/wxSearchView.js');
-
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+   
   },
 
   /**
@@ -15,14 +15,31 @@ Page({
    */
   onLoad: function (options) {
     // 2 搜索栏初始化
+    wx.showLoading({
+      title: '加载中...',
+    })
     var that = this;
-    WxSearch.init(
-      that,  // 本页面一个引用
-      ['跳舞', '美食', "旅行", "影视", '酒店'], // 热点搜索推荐，[]表示不使用
-      [],// 搜索匹配，[]表示不使用
-      that.mySearchFunction, // 提供一个搜索回调函数
-      that.myGobackFunction //提供一个返回回调函数
-    );
+    var serverUrl = app.serverUrl;
+   
+    wx.request({
+      url: serverUrl +'/hot/getHotSearch',
+      method:'GET',
+      success:function(res){
+        wx.hideLoading();
+        if (res.data.status == 200){
+          var hotDataList= res.data.result;
+          WxSearch.init(
+            that,  // 本页面一个引用
+            hotDataList, // 热点搜索推荐，[]表示不使用
+            hotDataList,// 搜索匹配，[]表示不使用
+            that.mySearchFunction, // 提供一个搜索回调函数
+            that.myGobackFunction //提供一个返回回调函数
+          );
+        }
+      }
+    })
+
+   
   },
   // 3 转发函数，固定部分，直接拷贝即可
   wxSearchInput: WxSearch.wxSearchInput,  // 输入变化时的操作
@@ -36,7 +53,7 @@ Page({
     // do your job here
     // 示例：跳转
     wx.redirectTo({
-      url: '../index/index?searchValue=' + value
+      url: '../index/index?isSaveHot=1' +'&searchContent=' + value
     })
   },
 
@@ -45,7 +62,7 @@ Page({
     // do your job here
     // 示例：返回
     wx.redirectTo({
-      url: '../index/index?searchValue=返回'
+      url: '../index/index'
     })
   }
  
