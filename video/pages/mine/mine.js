@@ -9,11 +9,37 @@ Page({
     isMe: true,
     nickname: "",
     isFollow: true,
-    publisherId: ''
+    publisherId: '',
+
+
+    videoSelClass: "video-info",
+    isSelectedWork: "video-info-selected",
+    isSelectedLike: "",
+    isSelectedFollow: "",
+
+    myVideoList: [],
+    myVideoPage: 1,
+    myVideoTotal: 1,
+
+    likeVideoList: [],
+    likeVideoPage: 1,
+    likeVideoTotal: 1,
+
+    followVideoList: [],
+    followVideoPage: 1,
+    followVideoTotal: 1,
+
+    myWorkFalg: false,
+    myLikesFalg: true,
+    myFollowFalg: true
+
 
 
   },
   onLoad(params) {
+    wx.showLoading({
+      title: '加载中.....',
+    })
     var serverUrl = app.serverUrl;
     var me = this;
 
@@ -37,6 +63,7 @@ Page({
         'userId': app.getGlobalUserInfo().id
       },
       success: function (res) {
+        wx.hideLoading();
         if (res.data.status == 200) {
           var userInfo = res.data.result;
           if (userInfo.faceImage != null && userInfo.faceImage != undefined && userInfo.faceImage != '') {
