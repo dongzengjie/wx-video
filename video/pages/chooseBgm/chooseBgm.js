@@ -19,6 +19,10 @@ Page({
     wx.request({
       url: serverUrl + '/bgm/bgmlist',
       method: 'GET',
+      header: {
+        'userToken' : app.getGlobalUserInfo().token,
+        'userId': app.getGlobalUserInfo().id
+      },
       success : function(res){
         wx.hideLoading();
         if(res.data.status ==200){
@@ -63,6 +67,10 @@ Page({
         userId: userId
       },
       filePath: fileUrl,
+      header: {
+        'userToken': app.getGlobalUserInfo().token,
+        'userId': app.getGlobalUserInfo().id
+      },
       name: 'file',
       success:function(res){
         var data = JSON.parse(res.data);

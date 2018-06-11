@@ -5,14 +5,21 @@ Page({
   },
 
   onLoad: function (params) {
-    var me  = this;
+    var me = this;
+ // debugger;
     var redirectUrl = params.redirectUrl;
-    
-  }, 
+    if (redirectUrl != null && redirectUrl != '' && redirectUrl != undefined) {
+      redirectUrl = redirectUrl.replace(/#/g, "?");
+      redirectUrl = redirectUrl.replace(/@/g, "=");
+      me.redirectUrl = redirectUrl;
+    }
+
+
+  },
 
   // 登录  
   doLogin: function (e) {
-   
+    var me =this;
     var formObject = e.detail.value;
     var username = formObject.username;
     var password = formObject.password;
@@ -40,7 +47,7 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: function (res) {
-      
+
           wx.hideLoading();
           if (res.data.status == 200) {
             // 登录成功跳转 
@@ -53,9 +60,17 @@ Page({
             //app.userInfo = res.data.result;
             app.setGlobalUserInfo(res.data.result);
             // 页面跳转
-            wx.navigateTo({
-              url: '../index/index',
-            })
+            var redirectUrl = me.redirectUrl;
+            if (redirectUrl != null && redirectUrl != undefined && redirectUrl != '') {
+              wx.redirectTo({
+                url: redirectUrl,
+              })
+            } else {
+              wx.redirectTo({
+                url: '../index/index',
+              })
+            }
+
           } else if (res.data.status == 500) {
             // 失败弹出框
             wx.showToast({
@@ -69,7 +84,7 @@ Page({
     }
   },
 
-  goRegistPage:function() {
+  goRegistPage: function () {
     wx.navigateTo({
       url: '../userRegist/regist',
     })
